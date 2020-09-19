@@ -45,6 +45,7 @@ GEM
     grpc (1.32.0)
       google-protobuf (~> 3.13)
       googleapis-common-protos-types (~> 1.0)
+    highline (2.0.3)
     jwt (2.2.2)
     memoist (0.16.2)
     multi_json (1.15.0)
@@ -63,6 +64,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   google-cloud-text_to_speech
+  highline
 
 BUNDLED WITH
    2.1.4
