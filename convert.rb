@@ -9,10 +9,11 @@ input_text = ask "Input text: "
 
 # Instantiates a client
 client = Google::Cloud::TextToSpeech.text_to_speech
-hash = { text: input_text }
 
-# Note: the voice can also be specified by name.
-# Names of voices can be retrieved with client.list_voices
+hash = {
+  text: input_text,
+}
+
 voice = {
   language_code: ENV["LANGUAGE_CODE"].to_s,
   ssml_gender: ENV["SSML_GENDER"].to_s,
@@ -29,10 +30,12 @@ response = client.synthesize_speech(
   audio_config: audio_config,
 )
 
-# The response's audio_content is binary.
-File.open "output/#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3", "wb" do |file|
-  # Write the response to the output file.
+# Write the file
+output_path = "output/#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3"
+File.open output_path, "wb" do |file|
   file.write response.audio_content
+  puts "Audio content written to #{output_path}.mp3'"
 end
 
-puts "Audio content written to file 'output/#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3'"
+# Play the file (macOS)
+fork { exec "afplay", output_path }
