@@ -2,4 +2,9 @@
 *.json
 *.DS_Store
 *.mp3
+/output
 */output
+/input
+*/input
+/anki
+*/anki
