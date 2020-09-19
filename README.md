@@ -21,5 +21,5 @@ This will
 
 
 3. Manually copy audio files from the output directory into anki collections folder (On macOS this is currently ~/Library/Application Support/Anki2/User/collection.media).
-4. Import CSV in anki mapping CSV fields to card fields.
+4. Import CSV in anki mapping CSV columns to card fields.
 
