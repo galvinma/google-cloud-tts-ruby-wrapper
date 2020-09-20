@@ -13,6 +13,7 @@ class RubyGoogleTTS
     @client = Google::Cloud::TextToSpeech.text_to_speech
     @raw_list = File.read("input/input.txt")
     @raw_csv = CSV.parse(File.read("input/input.csv"))
+    @raw_cloze_csv = CSV.parse(File.read("input/input_cloze.csv"))
   end
 
   # Creates a csv file for anki import
@@ -25,17 +26,62 @@ class RubyGoogleTTS
   #
   # Will create an anki import csv with rows native, target, audio
   # Place audio manually in media.collections
-  def create_anki_csv
+  def create_anki_vocab_csv
     file = "anki/anki_import.csv"
     CSV.open(file, "w") do |writer|
       @raw_csv.each do |row|
         target = row[0]
         native = row[1]
         audio_file = convert(target)
+
+        # Check for syntax errors
+        if target.empty? || native.empty? || audio_file.empty?
+          puts("WARNING: Unable to handle the following row:")
+          puts(row)
+          next
+        end
+
+        # Write the CSV row
         anki_audio_syntax = "[sound:#{audio_file}]" # [sound:fr-FR_je t'aime aussi.mp3]
         writer << [native, target, anki_audio_syntax]
       end
     end
+  end
+
+  # Creates a csv file for anki import
+  # Expects a list of words in input.csv
+  #
+  # {{c1::Je suis}} très heureux.,I am very happy
+  # {{c1::Tu es}} une belle femme.,You are a beautiful woman.
+  # {{c1::Il est}} sympa.,He is nice.
+  def create_anki_cloze_csv
+    file = "anki/anki_cloze_import.csv"
+    CSV.open(file, "w") do |writer|
+      @raw_cloze_csv.each do |row|
+        target = row[0]
+        target_stripped = strip_close_definition(target)
+        native = row[1]
+        audio_file = convert(target_stripped)
+
+        # Check for syntax errors
+        if target.empty? || native.empty? || audio_file.empty?
+          puts("WARNING: Unable to handle the following row:")
+          puts(row)
+          next
+        end
+
+        # Write the CSV row
+        anki_audio_syntax = "[sound:#{audio_file}]" # [sound:fr-FR_je t'aime aussi.mp3]
+        writer << [native, target, anki_audio_syntax]
+      end
+    end
+  end
+
+  def strip_close_definition(str)
+    str = str.gsub("c1", "")
+      .gsub("c2", "")
+      .gsub("c3", "")
+      .gsub(/({|}|:)+/, "")
   end
 
   # Parses a comma delimted list
