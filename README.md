@@ -13,7 +13,7 @@ Creator's primary use case is creation of Anki vocab cards. Cards have native la
 2. **Create audio files and Anki import CSV.** Execute the following IRB**:
    - load 'convert.rb'
    - x = RubyGoogleTTS.new
-   - x.create_anki_csv
+   - x.create_anki_vocab_csv
  
    ** Assumes macOS, Ruby 2.6+, and installed Gems
 
