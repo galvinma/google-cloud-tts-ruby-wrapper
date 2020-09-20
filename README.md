@@ -1,6 +1,6 @@
 ### Convert text input to mp3 via Google Cloud TTS
 
-Primary use case is creation of Anki vocab cards. Cards have native languagage, target lanugage, and audio fields. Current workflow:
+Creator's primary use case is creation of Anki vocab cards. Cards have native languagage, target lanugage, and audio fields. Current workflow:
 
 1. Create a CSV file of vocab words. For example:
 
