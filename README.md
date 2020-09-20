@@ -4,9 +4,9 @@ Primary use case is creation of Anki vocab cards. Cards have native languagage, 
 
 1. Create a CSV file of vocab words. For example:
 
-le poisson, fish
-le porc, pork
-le potage, soup
+le poisson, fish  
+le porc, pork  
+le potage, soup  
 
 2. Execute the following IRB**:
 - load 'convert.rb'
@@ -21,5 +21,5 @@ This will
 
 
 3. Manually copy audio files from the output directory into anki collections folder (On macOS this is currently ~/Library/Application Support/Anki2/User/collection.media).
-4. Import CSV in anki mapping CSV fields to card fields.
+4. Import CSV in anki mapping CSV columns to card fields.
 
