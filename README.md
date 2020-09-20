@@ -2,6 +2,8 @@
 
 Creator's primary use case is creation of Anki vocab cards. Cards have native languagage, target lanugage, and audio fields. Current workflow:
 
+**Prerequisites**: Need a google cloud project with billing enabled, and valid service account key. Fill in all the environment variables and rename env.template to .env.
+
 1. **Create a CSV file of vocab words.** For example:
 
    le poisson, fish  
