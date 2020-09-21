@@ -15,8 +15,8 @@ Creator's primary use case is creation of Anki vocab cards. Cards have native la
 - x = RubyGoogleTTS.new
 - x.create_anki_vocab_txt
 
-      ** Assumes macOS, Ruby 2.6+, and installed Gems  
-      ** Similar functionality exists to create cloze cards. Use, "create_anki_cloze_txt".
+   ** Assumes macOS, Ruby 2.6+, and installed Gems  
+   ** Similar functionality exists to create cloze cards. Use, "create_anki_cloze_txt".
 
 This will 
 - Create an MP3 audio file for each item in the first column in the /output directory.
