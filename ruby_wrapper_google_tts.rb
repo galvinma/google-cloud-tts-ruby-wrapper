@@ -132,7 +132,7 @@ class RubyWrapperGoogleTTS
     filename = "#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3"
     File.open output_path, "wb" do |file|
       file.write response.audio_content
-      puts "Audio content written to #{output_path}.mp3'"
+      puts "Audio content written to #{output_path}'"
     end
 
     # Play the file (macOS)
