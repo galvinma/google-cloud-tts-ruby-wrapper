@@ -12,7 +12,7 @@ Creator's primary use case is creation of Anki vocab cards. Cards have native la
 
 2. **Execute the following IRB**:
 - load 'ruby_wrapper_google_tts.rb'
-- x = RubyGoogleTTS.new
+- x = RubyWrapperGoogleTTS.new
 - x.create_anki_vocab_txt
 
    ** Assumes macOS, Ruby 2.6+, and installed Gems  
