@@ -2,9 +2,8 @@
 *.json
 *.DS_Store
 *.mp3
+*.txt
+/keys
 /output
-*/output
 /input
-*/input
 /anki
-*/anki
