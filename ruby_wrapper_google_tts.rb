@@ -1,6 +1,7 @@
 require "google/cloud/text_to_speech"
 require "highline/import"
 require "dotenv/load"
+require 'securerandom'
 
 Dotenv.load
 
@@ -23,7 +24,10 @@ class RubyWrapperGoogleTTS
   # Will create an anki import txt with rows native, target, audio
   # Place audio manually in media.collections
   def create_anki_vocab_txt
+    return unless "input/input_vocab.txt"
     target_list = parse_raw_input(File.read("input/input_vocab.txt"))
+    return unless target_list
+
     File.open("anki/import_vocab.txt", "w") do |writer|
       target_list.each do |row|
         target = row[0]
@@ -51,7 +55,9 @@ class RubyWrapperGoogleTTS
   # {{c1::Tu es}} une belle femme.,You are a beautiful woman.
   # {{c1::Il est}} sympa.,He is nice.
   def create_anki_cloze_txt
+    return unless "input/input_cloze.txt"
     target_list = parse_raw_input(File.read("input/input_cloze.txt"))
+    return unless target_list
     File.open("anki/import_cloze.txt", "w") do |writer|
       target_list.each do |row|
         target = row[0]
@@ -128,15 +134,13 @@ class RubyWrapperGoogleTTS
     )
 
     # Write the file
-    output_path = "output/#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3"
-    filename = "#{ENV["LANGUAGE_CODE"].to_s}_#{input_text}.mp3"
+    filename = "#{SecureRandom.uuid}.mp3"
+    output_path = "output/#{filename}"
     File.open output_path, "wb" do |file|
       file.write response.audio_content
-      puts "Audio content written to #{output_path}'"
+      puts "Audio content written to #{output_path}"
     end
 
-    # Play the file (macOS)
-    fork { exec "afplay", output_path }
     filename
   end
 end
