@@ -11,9 +11,14 @@ Creator's primary use case is generation of Anki vocab cards. Cards have native 
       le potage| soup  
 
 2. **Execute the following IRB**:
-- load 'ruby_wrapper_google_tts.rb'
-- x = RubyWrapperGoogleTTS.new
-- x.create_anki_vocab_txt
+```
+begin
+    load 'ruby_wrapper_google_tts.rb'
+    x = RubyWrapperGoogleTTS.new
+    x.create_anki_vocab_txt
+    x.create_anki_cloze_txt
+end
+```
 
    ** Assumes macOS, Ruby 2.6+, and installed Gems  
    ** Similar functionality exists to create cloze cards. Use, "create_anki_cloze_txt".
